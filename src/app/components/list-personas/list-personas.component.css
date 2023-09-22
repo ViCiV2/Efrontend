@@ -1,0 +1,43 @@
+table {
+    width: 100%;
+}
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 90%;
+    margin-right: 10px;
+}
+
+.btnEdit, .btnDelete {
+    cursor: pointer;
+}
+
+.btnDelete {
+    color: #B0304B
+}
+
+.btnEdit {
+    color: #376DCD;
+}
+
+.btnExcel {
+    margin: 10px;
+    background-color: #1D6F42;
+    border-color: #1D6F42;
+}
+
+.my-button {
+    padding: 10px 20px;
+    background-color: #1D6F42;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .my-button:hover {
+    background-color: #45a049;
+  }
+  .my-button:active {
+    background-color: #3e8e41;
+  }
+

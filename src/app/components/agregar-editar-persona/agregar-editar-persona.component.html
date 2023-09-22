@@ -1,0 +1,2231 @@
+<div class="container">
+    <h2 mat-dialog-title>Agregar persona</h2>
+    <mat-spinner *ngIf="loading" [diameter]="30" ></mat-spinner>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="addEditPersona()">
+    <mat-dialog-content>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>Nombre y apellido</mat-label>
+                    <input formControlName="Nombre" matInput placeholder="Ingrese Nombre y apellido" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Nombre')?.hasError('required') && form.get('Nombre')?.touched">
+                        En nombre es un campo <strong>requerido
+                    </strong></span>
+                </div>
+            </div>
+    
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>Edad</mat-label>
+                    <input formControlName="Edad" matInput placeholder="Ingrese Edad" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Edad')?.hasError('required') && form.get('Edad')?.touched">
+                        La edad es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('Edad')?.hasError('pattern')">
+                    La edad debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Fecha de aplicacion</mat-label>
+                    <input [max]="maxDate" formControlName="FechaAplicacion" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('FechaAplicacion')?.hasError('required') && form.get('FechaAplicacion')?.touched">
+                        la fecha de aplicacion es un campo <strong>requerido
+                    </strong></span>
+                </div>               
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field>
+                    <mat-label>Genero</mat-label>
+                    <mat-select formControlName="Genero">
+                      <mat-option *ngFor="let item of Genero" [value]="item">
+                        {{item}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+
+            <div class="colum">
+                <mat-form-field>
+                    <mat-label>Region</mat-label>
+                    <mat-select formControlName="Region">
+                      <mat-option *ngFor="let item of Region" [value]="item">
+                        {{item}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+    
+            
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>Municipio</mat-label>
+                    <input formControlName="Municipio" matInput placeholder="Ingrese Municipio" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Municipio')?.hasError('required') && form.get('Municipio')?.touched">
+                        En Municipio es un campo <strong>requerido
+                    </strong></span>
+                </div>
+            </div>
+
+            
+    
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>Codigo postal</mat-label>
+                    <input formControlName="CodigoPostal" matInput placeholder="Ingrese Codigo postal" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('CodigoPostal')?.hasError('required') && form.get('CodigoPostal')?.touched">
+                        El codigo postal es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('CodigoPostal')?.hasError('pattern')">
+                        El codigo postal debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>Grupo</mat-label>
+                    <input formControlName="Grupo" matInput placeholder="Ingrese Grupo" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('Grupo')?.hasError('required') && form.get('Grupo')?.touched">
+                        En Grupo es un campo <strong>requerido
+                    </strong></span>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o1" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o1')?.hasError('required') && form.get('o1')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o1')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o2" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o2')?.hasError('required') && form.get('o2')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o2')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o3" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o3')?.hasError('required') && form.get('o3')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o3')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o4" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o4')?.hasError('required') && form.get('o4')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o4')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o5" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o5')?.hasError('required') && form.get('o5')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o5')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o6" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o6')?.hasError('required') && form.get('o6')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o6')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o7" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o7')?.hasError('required') && form.get('o7')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o7')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o8" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o8')?.hasError('required') && form.get('o8')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o8')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o9" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o9')?.hasError('required') && form.get('o9')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o9')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o10" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o10')?.hasError('required') && form.get('o10')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o10')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o11" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o11')?.hasError('required') && form.get('o11')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o11')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o12" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o12')?.hasError('required') && form.get('o12')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o12')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o13" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o13')?.hasError('required') && form.get('o13')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o13')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o14" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o14')?.hasError('required') && form.get('o14')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o14')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o15" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o15')?.hasError('required') && form.get('o15')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o15')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o16" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o16')?.hasError('required') && form.get('o16')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o16')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o17" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o17')?.hasError('required') && form.get('o17')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o17')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o18" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o18')?.hasError('required') && form.get('o18')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o18')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o19" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o19')?.hasError('required') && form.get('o19')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o19')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o20" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o20')?.hasError('required') && form.get('o20')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o20')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o21" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o21')?.hasError('required') && form.get('o21')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o21')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o22" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o22')?.hasError('required') && form.get('o22')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o22')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o23" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o23')?.hasError('required') && form.get('o23')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o23')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o24" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o24')?.hasError('required') && form.get('o24')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o24')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o25" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o25')?.hasError('required') && form.get('o25')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o25')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o26" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o26')?.hasError('required') && form.get('o26')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o26')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o27" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o27')?.hasError('required') && form.get('o27')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o27')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o28" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o28')?.hasError('required') && form.get('o28')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o28')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o29" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o29')?.hasError('required') && form.get('o29')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o29')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o30" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o30')?.hasError('required') && form.get('o30')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o30')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o31" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o31')?.hasError('required') && form.get('o31')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o31')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o32" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o32')?.hasError('required') && form.get('o32')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o32')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o33" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o33')?.hasError('required') && form.get('o33')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o33')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o34" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o34')?.hasError('required') && form.get('o34')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o34')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o35" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o35')?.hasError('required') && form.get('o35')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o35')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o36" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o36')?.hasError('required') && form.get('o36')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o36')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o37" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o37')?.hasError('required') && form.get('o37')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o37')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o38" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o38')?.hasError('required') && form.get('o38')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o38')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o39" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o39')?.hasError('required') && form.get('o39')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o39')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o40" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o40')?.hasError('required') && form.get('o40')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o40')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o41" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o41')?.hasError('required') && form.get('o41')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o41')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o42" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o42')?.hasError('required') && form.get('o42')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o42')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o43" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o43')?.hasError('required') && form.get('o43')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o43')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o44" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o44')?.hasError('required') && form.get('o44')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o44')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o45" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o45')?.hasError('required') && form.get('o45')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o45')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o46" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o46')?.hasError('required') && form.get('o46')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o46')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o47" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o47')?.hasError('required') && form.get('o47')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o47')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o48" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o48')?.hasError('required') && form.get('o48')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o48')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o49" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o49')?.hasError('required') && form.get('o49')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o49')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o50" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o50')?.hasError('required') && form.get('o50')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o50')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o51" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o51')?.hasError('required') && form.get('o51')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o51')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o52" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o52')?.hasError('required') && form.get('o52')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o52')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o53" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o53')?.hasError('required') && form.get('o53')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o53')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o54" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o54')?.hasError('required') && form.get('o54')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o54')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o55" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o55')?.hasError('required') && form.get('o55')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o55')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o56" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o56')?.hasError('required') && form.get('o56')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o56')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o57" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o57')?.hasError('required') && form.get('o57')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o57')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o58" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o58')?.hasError('required') && form.get('o58')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o58')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o59" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o59')?.hasError('required') && form.get('o59')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o59')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o60" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o60')?.hasError('required') && form.get('o60')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o60')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o61" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o61')?.hasError('required') && form.get('o61')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o61')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o62" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o62')?.hasError('required') && form.get('o62')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o62')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o63" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o63')?.hasError('required') && form.get('o63')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o63')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o64" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o64')?.hasError('required') && form.get('o64')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o64')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o65" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o65')?.hasError('required') && form.get('o65')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o65')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o66" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o66')?.hasError('required') && form.get('o66')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o66')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o67" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o67')?.hasError('required') && form.get('o67')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o67')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o68" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o68')?.hasError('required') && form.get('o68')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o68')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o69" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o69')?.hasError('required') && form.get('o69')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o69')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o70" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o70')?.hasError('required') && form.get('o70')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o70')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o71" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o71')?.hasError('required') && form.get('o71')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o71')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o72" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o72')?.hasError('required') && form.get('o72')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o72')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o73" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o73')?.hasError('required') && form.get('o73')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o73')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o74" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o74')?.hasError('required') && form.get('o74')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o74')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o75" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o75')?.hasError('required') && form.get('o75')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o75')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o76" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o76')?.hasError('required') && form.get('o76')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o76')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o77" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o77')?.hasError('required') && form.get('o77')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o77')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o78" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o78')?.hasError('required') && form.get('o78')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o78')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o79" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o79')?.hasError('required') && form.get('o79')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o79')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o80" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o80')?.hasError('required') && form.get('o80')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o80')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o81" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o81')?.hasError('required') && form.get('o81')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o81')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o82" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o82')?.hasError('required') && form.get('o82')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o82')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o83" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o83')?.hasError('required') && form.get('o83')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o83')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o84" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o84')?.hasError('required') && form.get('o84')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o84')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o85" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o85')?.hasError('required') && form.get('o85')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o85')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o86" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o86')?.hasError('required') && form.get('o86')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o86')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o87" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o87')?.hasError('required') && form.get('o87')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o87')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o88" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o88')?.hasError('required') && form.get('o88')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o88')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o89" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o89')?.hasError('required') && form.get('o89')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o89')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o90" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o90')?.hasError('required') && form.get('o90')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o90')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o91" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o91')?.hasError('required') && form.get('o91')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o91')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o92" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o92')?.hasError('required') && form.get('o92')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o92')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o93" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o93')?.hasError('required') && form.get('o93')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o93')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o94" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o94')?.hasError('required') && form.get('o94')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o94')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o95" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o95')?.hasError('required') && form.get('o95')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o95')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o96" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o96')?.hasError('required') && form.get('o96')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o96')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o97" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o97')?.hasError('required') && form.get('o97')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o97')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o98" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o98')?.hasError('required') && form.get('o98')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o98')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o99" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o99')?.hasError('required') && form.get('o99')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o99')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o100" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o100')?.hasError('required') && form.get('o100')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o100')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o101" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o101')?.hasError('required') && form.get('o101')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o101')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o102" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o102')?.hasError('required') && form.get('o102')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o102')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o103" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o103')?.hasError('required') && form.get('o103')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o103')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o104" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o104')?.hasError('required') && form.get('o104')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o104')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o105" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o105')?.hasError('required') && form.get('o105')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o105')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o106" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o106')?.hasError('required') && form.get('o106')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o106')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o107" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o107')?.hasError('required') && form.get('o107')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o107')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o108" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o108')?.hasError('required') && form.get('o108')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o108')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o109" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o109')?.hasError('required') && form.get('o109')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o109')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o110" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o110')?.hasError('required') && form.get('o110')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o110')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o111" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o111')?.hasError('required') && form.get('o111')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o111')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o112" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o112')?.hasError('required') && form.get('o112')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o112')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o113" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o113')?.hasError('required') && form.get('o113')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o113')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o114" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o114')?.hasError('required') && form.get('o114')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o114')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o115" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o115')?.hasError('required') && form.get('o115')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o115')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o116" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o116')?.hasError('required') && form.get('o116')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o116')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o117" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o117')?.hasError('required') && form.get('o117')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o117')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o118" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o118')?.hasError('required') && form.get('o118')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o118')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o119" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o119')?.hasError('required') && form.get('o119')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o119')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o120" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o120')?.hasError('required') && form.get('o120')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o120')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o121" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o121')?.hasError('required') && form.get('o121')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o121')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o122" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o122')?.hasError('required') && form.get('o122')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o122')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="colum">
+                <mat-form-field appearance="fill">
+                    <mat-label>1</mat-label>
+                    <input formControlName="o123" matInput placeholder="Ingrese el puntaje correspondiente" autocomplete="off">
+                </mat-form-field>
+                <div class="error">
+                    <span *ngIf="form.get('o123')?.hasError('required') && form.get('o123')?.touched">
+                        Es un campo <strong>requerido
+                    </strong></span>
+                    <span *ngIf="form.get('o123')?.hasError('pattern')">
+                        Debe tener solo <strong>numeros</strong>
+                    </span>
+                </div>
+            </div>
+        </div>
+    
+        
+    
+    
+    
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button type="button" mat-button (click)="cancelar()">Cancelar</button>
+      <button type="submit" mat-button cdkFocusInitial>Aceptar</button>
+    </mat-dialog-actions>
+    
+</form>
+
+

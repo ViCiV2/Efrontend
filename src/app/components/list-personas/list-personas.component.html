@@ -1,0 +1,692 @@
+<mat-toolbar color="primary">
+    <span>Listado de alumnos con sus respectivos datos brutos en el perfil de estres</span>
+</mat-toolbar>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+
+<mat-card>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Filtro</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Filtro" #input autocomplete="off">
+        </mat-form-field>
+        <button (click)="addEditPersona()" mat-raised-button color="primary">Agregar</button>
+        <button class="my-button" (click)="exportToExcel()">Descargar excel</button>
+        
+        <table id="tabla" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element"> 
+                    <mat-icon class="btnEdit" matTooltip="Editar">edit</mat-icon>
+                    <mat-icon (click)="deletePersona(element.id)" class="btnDelete" matTooltip="Eliminar">delete</mat-icon>
+                </td>
+            </ng-container>
+
+            
+
+            <ng-container matColumnDef="Nombre">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.Nombre}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Edad">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Edad </th>
+                <td mat-cell *matCellDef="let element"> {{element.Edad}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="FechaAplicacion">
+                <th mat-header-cell *matHeaderCellDef> Fecha de aplicacion </th>
+                <td mat-cell *matCellDef="let element"> {{element.FechaAplicacion | date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Genero">
+                <th mat-header-cell *matHeaderCellDef> Genero </th>
+                <td mat-cell *matCellDef="let element"> {{element.Genero}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Region">
+                <th mat-header-cell *matHeaderCellDef> Region </th>
+                <td mat-cell *matCellDef="let element"> {{element.Region}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Municipio">
+                <th mat-header-cell *matHeaderCellDef> Municipio </th>
+                <td mat-cell *matCellDef="let element"> {{element.Municipio}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="CodigoPostal">
+                <th mat-header-cell *matHeaderCellDef> Codigo postal </th>
+                <td mat-cell *matCellDef="let element"> {{element.CodigoPostal}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Grupo">
+                <th mat-header-cell *matHeaderCellDef> Grupo </th>
+                <td mat-cell *matCellDef="let element"> {{element.Grupo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o1">
+                <th mat-header-cell *matHeaderCellDef> 1 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o1}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="o2">
+                <th mat-header-cell *matHeaderCellDef> 2 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o2}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o3">
+                <th mat-header-cell *matHeaderCellDef> 3 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o3}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o4">
+                <th mat-header-cell *matHeaderCellDef> 4 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o4}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o5">
+                <th mat-header-cell *matHeaderCellDef> 5 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o5}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o6">
+                <th mat-header-cell *matHeaderCellDef> 6 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o6}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o7">
+                <th mat-header-cell *matHeaderCellDef> 7 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o7}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o8">
+                <th mat-header-cell *matHeaderCellDef> 8 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o8}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o9">
+                <th mat-header-cell *matHeaderCellDef> 9 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o9}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o10">
+                <th mat-header-cell *matHeaderCellDef> 10 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o10}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o11">
+                <th mat-header-cell *matHeaderCellDef> 11 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o11}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o12">
+                <th mat-header-cell *matHeaderCellDef> 12 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o12}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o13">
+                <th mat-header-cell *matHeaderCellDef> 13 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o13}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o14">
+                <th mat-header-cell *matHeaderCellDef> 14 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o14}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o15">
+                <th mat-header-cell *matHeaderCellDef> 15 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o15}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o16">
+                <th mat-header-cell *matHeaderCellDef> 16 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o16}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o17">
+                <th mat-header-cell *matHeaderCellDef> 17 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o17}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o18">
+                <th mat-header-cell *matHeaderCellDef> 18 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o18}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o19">
+                <th mat-header-cell *matHeaderCellDef> 19 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o19}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o20">
+                <th mat-header-cell *matHeaderCellDef> 20 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o20}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o21">
+                <th mat-header-cell *matHeaderCellDef> 21 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o21}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o22">
+                <th mat-header-cell *matHeaderCellDef> 22 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o22}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o23">
+                <th mat-header-cell *matHeaderCellDef> 23 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o23}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o24">
+                <th mat-header-cell *matHeaderCellDef> 24 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o24}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o25">
+                <th mat-header-cell *matHeaderCellDef> 25 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o25}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o26">
+                <th mat-header-cell *matHeaderCellDef> 26 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o26}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o27">
+                <th mat-header-cell *matHeaderCellDef> 27 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o27}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o28">
+                <th mat-header-cell *matHeaderCellDef> 28 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o28}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o29">
+                <th mat-header-cell *matHeaderCellDef> 29 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o29}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o30">
+                <th mat-header-cell *matHeaderCellDef> 30 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o30}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o31">
+                <th mat-header-cell *matHeaderCellDef> 31 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o31}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o32">
+                <th mat-header-cell *matHeaderCellDef> 32 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o32}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o33">
+                <th mat-header-cell *matHeaderCellDef> 33 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o33}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o34">
+                <th mat-header-cell *matHeaderCellDef> 34 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o34}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o35">
+                <th mat-header-cell *matHeaderCellDef> 35 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o35}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o36">
+                <th mat-header-cell *matHeaderCellDef> 36 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o36}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o37">
+                <th mat-header-cell *matHeaderCellDef> 37 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o37}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o38">
+                <th mat-header-cell *matHeaderCellDef> 38 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o38}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o39">
+                <th mat-header-cell *matHeaderCellDef> 39 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o39}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o40">
+                <th mat-header-cell *matHeaderCellDef> 40 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o40}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o41">
+                <th mat-header-cell *matHeaderCellDef> 41 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o41}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o42">
+                <th mat-header-cell *matHeaderCellDef> 42 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o42}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o43">
+                <th mat-header-cell *matHeaderCellDef> 43 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o43}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o44">
+                <th mat-header-cell *matHeaderCellDef> 44 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o44}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o45">
+                <th mat-header-cell *matHeaderCellDef> 45 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o45}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o46">
+                <th mat-header-cell *matHeaderCellDef> 46 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o46}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o47">
+                <th mat-header-cell *matHeaderCellDef> 47 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o47}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o48">
+                <th mat-header-cell *matHeaderCellDef> 48 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o48}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o49">
+                <th mat-header-cell *matHeaderCellDef> 49 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o49}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o50">
+                <th mat-header-cell *matHeaderCellDef> 50 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o50}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o51">
+                <th mat-header-cell *matHeaderCellDef> 51 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o51}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o52">
+                <th mat-header-cell *matHeaderCellDef> 52 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o52}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o53">
+                <th mat-header-cell *matHeaderCellDef> 53 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o53}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o54">
+                <th mat-header-cell *matHeaderCellDef> 54 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o54}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o55">
+                <th mat-header-cell *matHeaderCellDef> 55 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o55}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o56">
+                <th mat-header-cell *matHeaderCellDef> 56 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o56}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o57">
+                <th mat-header-cell *matHeaderCellDef> 57 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o57}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o58">
+                <th mat-header-cell *matHeaderCellDef> 58 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o58}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o59">
+                <th mat-header-cell *matHeaderCellDef> 59 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o59}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o60">
+                <th mat-header-cell *matHeaderCellDef> 60 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o60}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o61">
+                <th mat-header-cell *matHeaderCellDef> 61 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o61}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o62">
+                <th mat-header-cell *matHeaderCellDef> 62 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o62}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o63">
+                <th mat-header-cell *matHeaderCellDef> 63 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o63}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o64">
+                <th mat-header-cell *matHeaderCellDef> 64 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o64}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o65">
+                <th mat-header-cell *matHeaderCellDef> 65 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o65}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o66">
+                <th mat-header-cell *matHeaderCellDef> 66 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o66}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o67">
+                <th mat-header-cell *matHeaderCellDef> 67 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o67}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o68">
+                <th mat-header-cell *matHeaderCellDef> 68 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o68}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o69">
+                <th mat-header-cell *matHeaderCellDef> 69 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o69}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o70">
+                <th mat-header-cell *matHeaderCellDef> 70 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o70}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o71">
+                <th mat-header-cell *matHeaderCellDef> 71 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o71}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o72">
+                <th mat-header-cell *matHeaderCellDef> 72 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o72}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o73">
+                <th mat-header-cell *matHeaderCellDef> 73 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o73}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o74">
+                <th mat-header-cell *matHeaderCellDef> 74 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o74}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o75">
+                <th mat-header-cell *matHeaderCellDef> 75 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o75}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o76">
+                <th mat-header-cell *matHeaderCellDef> 76 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o76}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o77">
+                <th mat-header-cell *matHeaderCellDef> 77 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o77}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o78">
+                <th mat-header-cell *matHeaderCellDef> 78 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o78}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o79">
+                <th mat-header-cell *matHeaderCellDef> 79 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o79}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o80">
+                <th mat-header-cell *matHeaderCellDef> 80 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o80}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="o81">
+                <th mat-header-cell *matHeaderCellDef> 81 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o81}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o82">
+                <th mat-header-cell *matHeaderCellDef> 82 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o82}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o83">
+                <th mat-header-cell *matHeaderCellDef> 83 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o83}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o84">
+                <th mat-header-cell *matHeaderCellDef> 84 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o84}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o85">
+                <th mat-header-cell *matHeaderCellDef> 85 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o85}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o86">
+                <th mat-header-cell *matHeaderCellDef> 86 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o86}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o87">
+                <th mat-header-cell *matHeaderCellDef> 87 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o87}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o88">
+                <th mat-header-cell *matHeaderCellDef> 88 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o88}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o89">
+                <th mat-header-cell *matHeaderCellDef> 89 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o89}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o90">
+                <th mat-header-cell *matHeaderCellDef> 90 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o90}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o91">
+                <th mat-header-cell *matHeaderCellDef> 91 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o91}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o92">
+                <th mat-header-cell *matHeaderCellDef> 92 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o92}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o93">
+                <th mat-header-cell *matHeaderCellDef> 93 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o93}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o94">
+                <th mat-header-cell *matHeaderCellDef> 94 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o94}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o95">
+                <th mat-header-cell *matHeaderCellDef> 95 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o95}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o96">
+                <th mat-header-cell *matHeaderCellDef> 96 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o96}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o97">
+                <th mat-header-cell *matHeaderCellDef> 97 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o97}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o98">
+                <th mat-header-cell *matHeaderCellDef> 98 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o98}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o99">
+                <th mat-header-cell *matHeaderCellDef> 99 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o99}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o100">
+                <th mat-header-cell *matHeaderCellDef> 100 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o100}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o101">
+                <th mat-header-cell *matHeaderCellDef> 101 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o101}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="o102">
+                <th mat-header-cell *matHeaderCellDef> 102 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o102}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o103">
+                <th mat-header-cell *matHeaderCellDef> 103 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o103}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o104">
+                <th mat-header-cell *matHeaderCellDef> 104 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o104}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o105">
+                <th mat-header-cell *matHeaderCellDef> 105 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o105}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o106">
+                <th mat-header-cell *matHeaderCellDef> 106 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o106}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o107">
+                <th mat-header-cell *matHeaderCellDef> 107 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o107}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o108">
+                <th mat-header-cell *matHeaderCellDef> 108 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o108}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o109">
+                <th mat-header-cell *matHeaderCellDef> 109 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o109}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o110">
+                <th mat-header-cell *matHeaderCellDef> 110 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o110}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o111">
+                <th mat-header-cell *matHeaderCellDef> 111 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o111}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o112">
+                <th mat-header-cell *matHeaderCellDef> 112 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o112}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o113">
+                <th mat-header-cell *matHeaderCellDef> 113 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o113}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o114">
+                <th mat-header-cell *matHeaderCellDef> 114 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o114}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o115">
+                <th mat-header-cell *matHeaderCellDef> 115 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o115}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o116">
+                <th mat-header-cell *matHeaderCellDef> 116 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o116}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o117">
+                <th mat-header-cell *matHeaderCellDef> 117 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o117}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o118">
+                <th mat-header-cell *matHeaderCellDef> 118 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o118}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o119">
+                <th mat-header-cell *matHeaderCellDef> 119 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o119}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o120">
+                <th mat-header-cell *matHeaderCellDef> 120 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o120}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o121">
+                <th mat-header-cell *matHeaderCellDef> 121 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o121}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o122">
+                <th mat-header-cell *matHeaderCellDef> 122 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o122}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="o123">
+                <th mat-header-cell *matHeaderCellDef> 123 </th>
+                <td mat-cell *matCellDef="let element"> {{element.o123}} </td>
+            </ng-container>
+
+           
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            	
+            
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100, 400]" aria-label="Select page of users"></mat-paginator>
+    </mat-card-content>
+</mat-card>
+  

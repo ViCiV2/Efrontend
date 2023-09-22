@@ -1,0 +1,23 @@
+mat-form-field{
+    width: 100%;
+}
+
+.row {
+    display: flex;
+}
+
+.colum {
+    flex: 50%;
+    margin: 0px 5px;
+}
+
+.error {
+    color: #B0304B;
+    margin-top: -20px;
+    font-size: 10px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
